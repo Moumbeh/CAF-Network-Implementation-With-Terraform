@@ -27,5 +27,5 @@ module "caf" {
   # GET all logged in user credentials $(az ad signed-in-user show)
   # https://github.com/aztfmod/terraform-azurerm-caf/issues/1173
   # https://github.com/hashicorp/terraform-provider-azurerm/issues/16982
-  logged_user_objectId = "d0f9c74f-3c02-4bf6-8042-d37df3328cff"
+  logged_user_objectId = "xxxxxxxxxxxxxxxxxx"
 }
