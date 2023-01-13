@@ -1,2 +1,2 @@
 # CAF-Network-Implementation-With-Terraform
-Cloud Adoption Framework for Azure - Terraform module
+Cloud Adoption Framework for Azure - Using Terraform modules
