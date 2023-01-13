@@ -10,7 +10,7 @@ pool:
 
 variables:
   bkstrgrg: 'CAF-RG'
-  bkstracc: 'cafstorageacc123'
+  bkstrg: 'cafstorageacc123'
   bkcontainer: 'tf-files'
   bkstrkey: 'network-tfstate'
 
@@ -30,7 +30,7 @@ stages:
               provider: 'azurerm'
               command: 'init'
               workingDirectory: '$(System.DefaultWorkingDirectory)'
-              backendServiceArm: 'cc-service-connection-1'
+              backendServiceArm: 'azure-devops'
               backendAzureRmResourceGroupName: '$(bkstrgrg)'
               backendAzureRmStorageAccountName: '$(bkstrg)'
               backendAzureRmContainerName: '$(bkcontainer)'
@@ -40,7 +40,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'validate'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/level1'
+              workingDirectory: '$(System.DefaultWorkingDirectory)'
   - stage: Terraform_deploy
     condition: succeeded ('tf_validate')
     dependsOn: tf_validate
@@ -56,7 +56,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/level1'
+              workingDirectory: '$(System.DefaultWorkingDirectory)'
               backendServiceArm: 'cc-service-connection-1'
               backendAzureRmResourceGroupName: '$(bkstrgrg)'
               backendAzureRmStorageAccountName: '$(bkstrg)'
@@ -67,12 +67,12 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/level1'
-              environmentServiceNameAzureRM: 'cc-service-connection-1'
+              workingDirectory: '$(System.DefaultWorkingDirectory)'
+              environmentServiceNameAzureRM: 'azure-devops'
           - task: TerraformTaskV3@3
             displayName: Apply
             inputs:
               provider: 'azurerm'
               command: 'apply'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/level1'
-              environmentServiceNameAzureRM: 'cc-service-connection-1'
+              workingDirectory: '$(System.DefaultWorkingDirectory)'
+              environmentServiceNameAzureRM: 'azure-devops'
